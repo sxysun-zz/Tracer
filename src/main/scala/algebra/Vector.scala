@@ -9,15 +9,6 @@ case class Vector(coord: List[Float]) {
 	def +(vec: Vector) = vecCorrespond(vec)(_+_)
 	def -(vec: Vector) = vecCorrespond(vec)(_-_)
 	def cross(vec: Vector): Vector = ???
-  def higherCorrespondProc[A, B, C](l1: List[A])
-	    (l2: List[B])(f: (A, B) => C): List[C] = {
-	  def higherTail(n: Int, r: List[C]): List[C] = n match {
-	    case -1 => r
-	    case _ => 
-	      higherTail(n - 1, r :+ f(l1.reverse.drop(n).head, l2.reverse.drop(n).head))
-	  }
-	  higherTail(Math.min(l1.length, l2.length) - 1, List[C]())
-	}
   def vecCorrespond(vec: Vector)(f: (Float, Float) => Float):Vector =
-	  Vector(higherCorrespondProc(coord)(vec.coord)(f))
+	  Vector(higher.higherCorrespondProc(coord)(vec.coord)(f))
 }

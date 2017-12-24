@@ -7,7 +7,9 @@ import main.scala.algebra.Vector
 import java.awt.Color
 
 case class SphereSurface (radius: Float, center: Vector, 
-    oriColor: Color) extends Surface{
+    oriColor: Color,
+    specularColor: Color,
+    ambientColor: Color, phongExponent: Float) extends Surface{
   
 	def hit(sphere: SphereSurface, ray:ParametricRay): Boolean = 
 	  return discriminant(sphere, ray) >= 0
@@ -22,8 +24,7 @@ case class SphereSurface (radius: Float, center: Vector,
 	def getNormal(sphere: SphereSurface, ray: ParametricRay, 
 	    dis: Float, hitPoint: Float): Vector = {
 		if(dis >= 0) 
-		  return (ray.position(hitPoint, 
-		      ray.viewPosition, ray.endPosition) - this.center) / this.radius
+		  return (ray.position(hitPoint) - this.center) / this.radius
 		else return Vector.apply(List(0f,0f,0f))
 	}
 	
