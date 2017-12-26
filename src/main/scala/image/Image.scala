@@ -12,7 +12,8 @@ import java.awt.image.BufferedImage
 case class Image(imgCfg: ImageConfig) {
 
   def paint(lis: List[Pixel]): BufferedImage = {
-      val img = new BufferedImage(imgCfg.width + 1, imgCfg.height + 1, BufferedImage.TYPE_INT_RGB)
+      val img = new BufferedImage(imgCfg.width + 1, 
+          imgCfg.height + 1, BufferedImage.TYPE_INT_RGB)
       def paintTail(t: Tuple2[Int, Int], li: List[Pixel]):BufferedImage = t match {
         case Tuple2(imgCfg.width, imgCfg.height) => img
         case Tuple2(_, imgCfg.height) => {
@@ -27,8 +28,6 @@ case class Image(imgCfg: ImageConfig) {
       paintTail((0, 0), lis)
   }
   
-  def saveTo(img: BufferedImage) = {
-    val fpath: String = "./output.png"
+  def saveTo(img: BufferedImage) = 
     ImageIO.write(img, imgCfg.form, new File(imgCfg.path))
-  }
 }
