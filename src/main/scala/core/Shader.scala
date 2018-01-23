@@ -8,7 +8,7 @@ import main.scala.image.Pixel
 import java.awt.Color
 
 case class Shader (scnCfg: SceneConfig, norm: Vector, 
-    hitPosition: Vector, obj: SphereSurface) {
+    hitPosition: Vector, obj: Surface) {
   
   def shade(): Pixel = {
     val combined = scnCfg.light.map(x => 
