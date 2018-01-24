@@ -4,6 +4,8 @@ purely functional ray tracer in scala
 ### Overview
 Implemented 
 
+[__Compressive Sensing__](./cs.md)
+
 0. Rendering
 * Light
 * Sphere modeling
