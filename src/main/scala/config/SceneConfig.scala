@@ -5,7 +5,7 @@ import main.scala.surfaces._
 import java.awt.Color
 
 case class SceneConfig (imageCenter: Vector, viewPos: Vector, bg: Color, 
-    objs: List[Surface], light: List[Light], ambientLightIntensity: Float){
+    objs: List[SphereSurface], light: List[Light], ambientLightIntensity: Float){
   
 }
 

@@ -8,7 +8,7 @@ import main.scala.image.Pixel
 import java.awt.Color
 
 case class Shader (scnCfg: SceneConfig, norm: Vector, 
-    hitPosition: Vector, obj: Surface) {
+    hitPosition: Vector, obj: SphereSurface) {
   
   def shade(): Pixel = {
     val combined = scnCfg.light.map(x => 
@@ -28,8 +28,8 @@ case class Shader (scnCfg: SceneConfig, norm: Vector,
   def shadow(l: Light): Boolean = {
     val epsilon = 0.01f
     val ray = ParametricRay.apply(epsilon, this.hitPosition, l.position)
-    (false /: scnCfg.objs.map(x => x.hit(x, ray) && 
-        x.getHitPoint(x, ray, x.discriminant(x, ray)) > epsilon
+    (false /: scnCfg.objs.map(x => x.hit(ray) && 
+        x.getHitPoint(ray) > epsilon
     )) (_||_)
   }
   

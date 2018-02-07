@@ -30,18 +30,17 @@ object Renderer {
             pixelPosition)
             
         val processed = scnCfg.objs.zipWithIndex.map({
-          x => (x._1.getHitPoint(x._1, ray, x._1.discriminant(x._1, ray)), x._2)
+          x => (x._1.getHitPoint(ray), x._2)
         }).sortWith(_._1 < _._1).filter(_._1 != -1f)
         
         if(processed != Nil){
           
           val small = scnCfg.objs.drop(processed.head._2).head
           
-          val norm = small.getNormal(small, ray, 
-              small.discriminant(small, ray), processed.head._1)
+          val norm = small.getNormal(ray, processed.head._1)
           
-          val shader = Shader.apply(scnCfg, norm, 
-              ParametricRay.apply(processed.head._1, scnCfg.viewPos, 
+          val shader = Shader(scnCfg, norm, 
+              ParametricRay(processed.head._1, scnCfg.viewPos, 
               scnCfg.imageCenter + pixelPosition).position(processed.head._1)
               , small)
           
